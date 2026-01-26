@@ -1,0 +1,127 @@
+@import "../../_globalColor";
+
+/* ===============================
+   BASE STYLES (LIGHT THEME)
+=============================== */
+
+.certification-main {
+  padding: 80px 10%;
+  background-color: #f9fafc;
+  color: #1a1a1a;
+}
+
+.certification-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  margin-top: 60px;
+}
+
+.certification-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease-in-out;
+}
+
+.certification-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+}
+
+.certification-logo {
+  max-width: 140px;
+  margin-bottom: 20px;
+}
+
+.certification-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #111;
+}
+
+.certification-subtitle {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.cert-status {
+  display: inline-block;
+  padding: 6px 14px;
+  font-size: 12px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.cert-status.completed {
+  background-color: #2ecc71;
+  color: #000;
+}
+
+.cert-status.progress {
+  background-color: #f1c40f;
+  color: #000;
+}
+
+.certification-links {
+  margin-top: 20px;
+}
+
+.certification-view-btn {
+  background-color: #5b5bff;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.certification-view-btn:hover {
+  background-color: #4444dd;
+}
+
+/* ===============================
+   DARK THEME OVERRIDES
+=============================== */
+
+.dark-mode .certification-main {
+  background-color: #0f1624;
+  color: #ffffff;
+}
+
+.dark-mode .certification-card {
+  background: linear-gradient(145deg, #1c2230, #121722);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.dark-mode .certification-title {
+  color: #ffffff;
+}
+
+.dark-mode .certification-subtitle {
+  color: $subTitle;
+}
+
+.dark-mode .certification-view-btn {
+  background-color: #7f5af0;
+}
+
+.dark-mode .certification-view-btn:hover {
+  background-color: #6846d8;
+}
+
+/* ===============================
+   RESPONSIVE
+=============================== */
+
+@media (max-width: 768px) {
+  .certification-main {
+    padding: 60px 6%;
+  }
+}
