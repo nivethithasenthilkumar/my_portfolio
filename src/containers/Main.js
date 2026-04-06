@@ -21,11 +21,14 @@ const pages = [
 ];
 
 const Main = () => {
+  console.log("[v0] Main component rendering");
   const darkPref = window.matchMedia("(prefers-color-scheme: dark)");
   const [isDark, setIsDark] = useLocalStorage("isDark", true);
   const [currentPage, setCurrentPage] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [slideDirection, setSlideDirection] = useState('');
+  
+  console.log("[v0] Current page:", currentPage, "Pages available:", pages.length);
 
   const changeTheme = () => {
     setIsDark(!isDark);

@@ -59,7 +59,7 @@ const SkillsPage = () => {
                   <path d="M13 3L4 14h7v7l9-11h-7V3z"/>
                 </svg>
               </span>
-              <span className="highlight-text">{skill.props.children}</span>
+              <span className="highlight-text">{skill}</span>
             </div>
           ))}
         </div>
