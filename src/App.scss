@@ -1,9 +1,32 @@
-@import "./globalColor";
+@import "./_globalColor";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: $primaryBg;
+  color: $primaryText;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 .App {
   text-align: center;
   width: 100%;
-  overflow-x: hidden;
+  height: 100vh;
+  overflow: hidden;
+  background-color: $primaryBg;
 }
 
 .App-logo {
@@ -11,20 +34,45 @@
 }
 
 .App-header {
-  background-color: $appHeaderBG;
+  background-color: $primaryBg;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(0.625rem + 2vmin);
-  color: $textColorDark;
+  color: $primaryText;
 }
 
 .App-link {
-  color: $appLink;
+  color: $primaryAccent;
 }
 
 .subTitle {
-  color: $subTitle;
+  color: $mutedText;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: $secondaryBg;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $primaryAccent;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00b894;
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(0, 212, 170, 0.3);
+  color: $primaryText;
 }

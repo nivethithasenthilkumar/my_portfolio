@@ -1,0 +1,41 @@
+@import "../../_globalColor";
+
+.floating-bubbles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(0, 212, 170, 0.2),
+    rgba(0, 212, 170, 0.05)
+  );
+  border: 1px solid rgba(0, 212, 170, 0.2);
+  backdrop-filter: blur(2px);
+  will-change: transform;
+  transition: opacity 0.3s ease;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    width: 30%;
+    height: 30%;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    border-radius: 50%;
+  }
+}
