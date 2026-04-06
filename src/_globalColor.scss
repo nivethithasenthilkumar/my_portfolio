@@ -1,90 +1,105 @@
-/* Change colors in this file to style to your needs on a global level. 
-Certain colors are used for different and multiply types of elements. 
-For greater control over colors visit each components .scss file. */
+/* 
+  3-COLOR PALETTE SYSTEM
+  1. Background: Deep Charcoal (#0a0a0a)
+  2. Text/Primary: Pure White (#ffffff)  
+  3. Accent: Cyan/Teal (#00d4aa)
+*/
+
+// Primary 3 colors
+$primaryBg: #0a0a0a;
+$primaryText: #ffffff;
+$primaryAccent: #00d4aa;
+
+// Derived colors (variations of the 3)
+$secondaryBg: #111111;
+$tertiaryBg: #1a1a1a;
+$mutedText: rgba(255, 255, 255, 0.6);
+$dimText: rgba(255, 255, 255, 0.4);
 
 // button colors
-$buttonColor: #55198b;
-$buttonHover: #8c43ce;
-$topButtonHover: #000;
+$buttonColor: $primaryAccent;
+$buttonHover: #00b894;
+$topButtonHover: $primaryAccent;
 
-// text colors light theme
-$titleColor: #000000;
-$textColor: #000000;
-$subTitle: #868e96;
-$cardSubtitle: #666666;
-$talkCardSubTitle: #7f8287;
-$blogCardTitleColor: #262626;
+// text colors
+$titleColor: $primaryText;
+$textColor: $primaryText;
+$subTitle: $mutedText;
+$cardSubtitle: $mutedText;
+$talkCardSubTitle: $mutedText;
+$blogCardTitleColor: $primaryText;
 
 // text color dark theme
-$textColorDark: #ffffff;
+$textColorDark: $primaryText;
 
 // toggle switch colors
-$toggleCheck: #2196f3;
-$toggleSwitchSliderBG: #ccc;
+$toggleCheck: $primaryAccent;
+$toggleSwitchSliderBG: $tertiaryBg;
 
 // githubRepo specific colors
-$githubRepoCardLanguageColorBG: #0000ff;
-$githubRepoCardColor: rgb(88, 96, 105);
-$githubRepoCardRepoCardStatsColor: rgb(106, 115, 125);
-$githubRepoCardRepoNameColor: rgb(36, 41, 46);
-$githubProfileCardLocationTS: #ffebcd;
-$githubProfileCardBorder: #6c63ff;
+$githubRepoCardLanguageColorBG: $primaryAccent;
+$githubRepoCardColor: $mutedText;
+$githubRepoCardRepoCardStatsColor: $dimText;
+$githubRepoCardRepoNameColor: $primaryText;
+$githubProfileCardLocationTS: $primaryAccent;
+$githubProfileCardBorder: $primaryAccent;
 
-// light background colors
-$lightBackground1: #fff;
-$lightBackground2: rgb(255, 255, 255);
-$lightBackground3: #f5f2f4;
-$blogCardContainerColor: #586069;
-// dark background colors
-$darkBackground: #171c28;
+// background colors
+$lightBackground1: $primaryBg;
+$lightBackground2: $secondaryBg;
+$lightBackground3: $tertiaryBg;
+$blogCardContainerColor: $mutedText;
+$darkBackground: $primaryBg;
 
-// light theme box shadows
-$lightBoxShadowDark: rgba(0, 0, 0, 0.2);
-$lightBoxShadow: rgba(0, 0, 0, 0.1);
-$lightBoxShadowDarker: rgba(0, 0, 0, 0.3);
-
-// dark theme box shadows
-$darkBoxShadow: #d9dbdf;
-$darkBoxShadow2: #ffffff;
+// box shadows
+$lightBoxShadowDark: rgba(0, 212, 170, 0.1);
+$lightBoxShadow: rgba(0, 212, 170, 0.05);
+$lightBoxShadowDarker: rgba(0, 212, 170, 0.15);
+$darkBoxShadow: $primaryAccent;
+$darkBoxShadow2: $primaryText;
 
 // linear gradients
 $experienceCardBlurredDivLG: linear-gradient(
-  rgba(0, 0, 0, 0.4),
-  rgba(0, 0, 0, 0.2)
+  rgba(10, 10, 10, 0.8),
+  rgba(10, 10, 10, 0.6)
 );
 $experienceCardBannerLG: linear-gradient(
-  rgba(0, 0, 0, 0.7),
-  rgba(0, 0, 0, 0.5)
+  rgba(10, 10, 10, 0.9),
+  rgba(10, 10, 10, 0.7)
 );
 
 // borders
-$progressBarBackground: rgb(243, 239, 239);
-$lightBorder1: rgba(211, 211, 211, 0.397);
-$educationCardBorder: #a9a7f9;
+$progressBarBackground: $tertiaryBg;
+$lightBorder1: rgba(255, 255, 255, 0.1);
+$educationCardBorder: $primaryAccent;
 
 // hovers
-$achievementCertificateCardHoverDark: rgba(255, 255, 255, 0.2);
-$blogCardHoverSmallColor: rgba(255, 255, 255, 0.8);
-$headerHoverBG: #f4f4f4;
-$contactDetailHoverTS: #b5b5b5;
+$achievementCertificateCardHoverDark: rgba(0, 212, 170, 0.1);
+$blogCardHoverSmallColor: rgba(0, 212, 170, 0.1);
+$headerHoverBG: $tertiaryBg;
+$contactDetailHoverTS: $primaryAccent;
 
 // misc backgrounds
-$progressBarSpanBG: #aaa5ff;
-$iconBackground: #333;
-$appHeaderBG: #282c34;
+$progressBarSpanBG: $primaryAccent;
+$iconBackground: $tertiaryBg;
+$appHeaderBG: $primaryBg;
 
 // misc colors
-$skillsColor: #645beb;
-$appLink: #09d3ac;
+$skillsColor: $primaryAccent;
+$appLink: $primaryAccent;
 
-// social media icons
-$faceBook: #3b5998;
-$linkedin: #0e76a8;
-$github: #333;
-$gitlab: #fca326;
-$google: #ea4335;
-$twitter: #1da1f2;
-$medium: #000;
-$stackoverflow: #f48024;
-$instagram: #c13584;
-$kaggle: #20beff;
+// social media icons (all using accent for consistency)
+$faceBook: $primaryAccent;
+$linkedin: $primaryAccent;
+$github: $primaryText;
+$gitlab: $primaryAccent;
+$google: $primaryAccent;
+$twitter: $primaryAccent;
+$medium: $primaryText;
+$stackoverflow: $primaryAccent;
+$instagram: $primaryAccent;
+$kaggle: $primaryAccent;
+
+// Bubble colors
+$bubbleColor: rgba(0, 212, 170, 0.15);
+$bubbleBorder: rgba(0, 212, 170, 0.3);

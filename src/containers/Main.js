@@ -1,73 +1,125 @@
-import React, {useEffect, useState} from "react";
-import Header from "../components/header/Header";
-import Greeting from "./greeting/Greeting";
-import Skills from "./skills/Skills";
-import StackProgress from "./skillProgress/skillProgress";
-import Education from "./education/Education";
-import WorkExperience from "./workExperience/WorkExperience";
-import Projects from "./projects/Projects";
-import StartupProject from "./StartupProjects/StartupProject";
-import Certification from "./certification/Certification"; // ✅ ADDED
-import Achievement from "./achievement/Achievement";
-import Blogs from "./blogs/Blogs";
-import Talks from "./talks/Talks";
-import Twitter from "./twitter-embed/twitter";
-import Podcast from "./podcast/Podcast";
-import Profile from "./profile/Profile";
-import Footer from "../components/footer/Footer";
-import ScrollToTopButton from "./topbutton/Top";
-import SplashScreen from "./splashScreen/SplashScreen";
-import {splashScreen} from "../portfolio";
+import React, {useEffect, useState, useCallback} from "react";
 import {StyleProvider} from "../contexts/StyleContext";
 import {useLocalStorage} from "../hooks/useLocalStorage";
+import FloatingBubbles from "../components/FloatingBubbles/FloatingBubbles";
+import PageNavigation from "../components/PageNavigation/PageNavigation";
+import HomePage from "./pages/HomePage";
+import AboutPage from "./pages/AboutPage";
+import SkillsPage from "./pages/SkillsPage";
+import ExperiencePage from "./pages/ExperiencePage";
+import ProjectsPage from "./pages/ProjectsPage";
+import ContactPage from "./pages/ContactPage";
 import "./Main.scss";
+
+const pages = [
+  { id: 0, name: "Home", component: HomePage },
+  { id: 1, name: "About", component: AboutPage },
+  { id: 2, name: "Skills", component: SkillsPage },
+  { id: 3, name: "Experience", component: ExperiencePage },
+  { id: 4, name: "Projects", component: ProjectsPage },
+  { id: 5, name: "Contact", component: ContactPage },
+];
 
 const Main = () => {
   const darkPref = window.matchMedia("(prefers-color-scheme: dark)");
-  const [isDark, setIsDark] = useLocalStorage("isDark", darkPref.matches);
-  const [isShowingSplashAnimation, setIsShowingSplashAnimation] =
-    useState(true);
-
-  useEffect(() => {
-    if (splashScreen.enabled) {
-      const splashTimer = setTimeout(
-        () => setIsShowingSplashAnimation(false),
-        splashScreen.duration
-      );
-      return () => clearTimeout(splashTimer);
-    }
-  }, []);
+  const [isDark, setIsDark] = useLocalStorage("isDark", true);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [slideDirection, setSlideDirection] = useState('');
 
   const changeTheme = () => {
     setIsDark(!isDark);
   };
 
+  const navigateToPage = useCallback((pageIndex) => {
+    if (isAnimating || pageIndex === currentPage) return;
+    
+    setIsAnimating(true);
+    setSlideDirection(pageIndex > currentPage ? 'slide-left' : 'slide-right');
+    
+    setTimeout(() => {
+      setCurrentPage(pageIndex);
+      setSlideDirection(pageIndex > currentPage ? 'slide-in-right' : 'slide-in-left');
+      
+      setTimeout(() => {
+        setIsAnimating(false);
+        setSlideDirection('');
+      }, 400);
+    }, 400);
+  }, [currentPage, isAnimating]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        if (currentPage < pages.length - 1) {
+          navigateToPage(currentPage + 1);
+        }
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        if (currentPage > 0) {
+          navigateToPage(currentPage - 1);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentPage, navigateToPage]);
+
+  const CurrentPageComponent = pages[currentPage].component;
+
   return (
-    <div className={isDark ? "dark-mode" : null}>
+    <div className="dark-mode portfolio-container">
       <StyleProvider value={{isDark, changeTheme}}>
-        {isShowingSplashAnimation && splashScreen.enabled ? (
-          <SplashScreen />
-        ) : (
-          <>
-            <Header />
-            <Greeting />
-            <Skills />
-            <StackProgress />
-            <Education />
-            <WorkExperience />
-            <Projects />
-            <StartupProject />
-            <Certification />   {/* ✅ ADDED HERE */}
-            <Achievement />
-            <Blogs />
-            <Talks />
-            <Twitter />
-            <Podcast />
-            <Profile />
-            <Footer />
-            <ScrollToTopButton />
-          </>
-        )}
+        <FloatingBubbles />
+        
+        <PageNavigation 
+          pages={pages} 
+          currentPage={currentPage} 
+          onNavigate={navigateToPage}
+        />
+        
+        <main className={`page-content ${slideDirection}`}>
+          <CurrentPageComponent />
+        </main>
+        
+        <div className="page-indicators">
+          {pages.map((page, index) => (
+            <button
+              key={page.id}
+              className={`indicator ${index === currentPage ? 'active' : ''}`}
+              onClick={() => navigateToPage(index)}
+              aria-label={`Go to ${page.name}`}
+            />
+          ))}
+        </div>
+
+        <div className="nav-arrows">
+          <button 
+            className={`arrow-btn prev ${currentPage === 0 ? 'disabled' : ''}`}
+            onClick={() => currentPage > 0 && navigateToPage(currentPage - 1)}
+            disabled={currentPage === 0}
+            aria-label="Previous page"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+          <button 
+            className={`arrow-btn next ${currentPage === pages.length - 1 ? 'disabled' : ''}`}
+            onClick={() => currentPage < pages.length - 1 && navigateToPage(currentPage + 1)}
+            disabled={currentPage === pages.length - 1}
+            aria-label="Next page"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
+        </div>
+
+        <div className="keyboard-hint">
+          Use arrow keys to navigate
+        </div>
       </StyleProvider>
     </div>
   );
